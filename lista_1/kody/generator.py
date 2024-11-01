@@ -5,10 +5,11 @@ import sys
 min_float = -1000000
 max_float = 1000000
 
+n = int(sys.argv[1]) # random.randint(10000, 100000)
+
 with open("input.txt", "w") as test:
-  n = random.randint(1000, 10000)
   test.write(f'{n}' + '\n')
   for i in range(n):
-    test.write(f'{random.randint(min_float, max_float)}')
+    test.write(f'{random.uniform(min_float, max_float)}')
     if i != n:
       test.write('\n')
