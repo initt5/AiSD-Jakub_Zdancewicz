@@ -17,4 +17,4 @@ for str in input().split():
   else:
     A.append(float(str))
 isSorted = sorted(A) == A
-print(f"Czy posortowany? {isSorted} \nDlugosc tablicy: {length} \nIlosc porownan: {comparisions} \nIlosc przypisan: {assignments}")
+print(f"Czy posortowany? {isSorted} \nDlugość tablicy: {length} \nIlość przypisań: {assignments} \nIlość porównań: {comparisions}")
