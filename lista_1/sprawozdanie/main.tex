@@ -173,7 +173,7 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Inser
     \caption{Liczba operacji dla modyfikacji algorytmu \texttt{Insertion Sort} przy różnych rozmiarach tablicy}
     \label{tab:m_insertion_results}
 \end{table}
-Co ciekawe, dla tablicy o długości $n$ algorytm \textit{Insertion Sort} wykonuje średnio $n^2$ operacji. Z tabeli jednoznacznie wynika, że modyfikacja algorytmu \textit{Insertion Sort} jest bardziej wydajna dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:insertion}.
+Co ciekawe, dla tablicy o długości $n$ algorytm \textit{Insertion Sort} wykonuje średnio $n^2$ operacji. Z tabeli jednoznacznie wynika, że modyfikacja algorytmu \textit{Insertion Sort} jest wydajniejsza dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:insertion}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figure_1.png}
@@ -285,7 +285,7 @@ Możemy zatem zapisać:
 \[
     T(n) = \sum_{k=0}^{\log_3 n} 3^k\left(\frac{n}{3^k}\right) = n\sum_{k=0}^{\log_3 n} 1 = \Theta(n \log n)
 \]
-Intuicyjnie, dzięki szybszemu przejściu do zbiorów jednoelementowych, modyfikacja powinna być bardziej efektywny od orginału.
+Intuicyjnie, dzięki szybszemu przejściu do zbiorów jednoelementowych, modyfikacja powinna być efektywniejsza od orginału.
 \subsubsection{Wyniki dla Merge Sort}
 Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Merge Sort} oraz jego modyfikacji na tablicach o różnej wielkości:
 \begin{table}[H]
@@ -324,7 +324,7 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Merge
     \label{tab:m_merge_results}
 \end{table}
 
-Z tabel wynika, że modyfikacja algorytmu \textit{Merge Sort} jest bardziej wydajna dla większych tablic. Co ciekawe, ilość porównań w modyfikacji algorytmu \textit{Merge Sort} rośnie szybciej niż w orginalym algorytmie. Różnice w ilości wykonanych operacji są dobrze zobrazowane na Wykresie \ref{fig:merge}.
+Z tabel wynika, że modyfikacja algorytmu \textit{Merge Sort} jest wydajniejsza dla większych tablic. Co ciekawe, ilość porównań w modyfikacji algorytmu \textit{Merge Sort} rośnie szybciej niż w orginalym algorytmie. Różnice w ilości wykonanych operacji są dobrze zobrazowane na Wykresie \ref{fig:merge}.
 
 \begin{figure}[H]
     \centering
@@ -497,7 +497,7 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Heap 
     \label{tab:m_heap_results}
 \end{table}
 
-Z tabel wynika, że modyfikacja algorytmu \textit{Heap Sort} jest bardziej wydajna dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:heap}.
+Z tabel wynika, że modyfikacja algorytmu \textit{Heap Sort} jest wydajniejsza dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:heap}.
 
 \begin{figure}[H]
     \centering
@@ -517,5 +517,5 @@ Porównując \textit{Merge Sort} i \textit{Heap Sort} możemy zauważyć, że pi
 \end{figure}
 Jednak \textit{Merge Sort} posiada jedną znaczącą wadę – złożoność pamięciową. Z powodu konieczności definiowania dodatkowych tablic \textbf{L} i \textbf{R}, ilość pamięci potrzebnej do działania algorytmu jest nieporównywalnie większa niż w przypadku \textit{Heap Sort}. Wybór odpowiedniego algorytmu zależy więc od dostępnych zasobów.
 
-Zaproponowane modyfikacje algorytmów okazują się bardziej efektywne od ich oryginałów; różnica jest szczególnie widoczna w przypadku dużych zestawów danych. Warto zatem rozważyć ich zastosowanie, zwłaszcza gdy zasoby są mocno ograniczone.
+Zaproponowane modyfikacje algorytmów okazują się efektywniejsza od ich oryginałów; różnica jest szczególnie widoczna w przypadku dużych zestawów danych. Warto zatem rozważyć ich zastosowanie, zwłaszcza gdy zasoby są mocno ograniczone.
 \end{document}
