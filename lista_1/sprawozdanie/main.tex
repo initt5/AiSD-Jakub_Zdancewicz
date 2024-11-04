@@ -36,9 +36,9 @@
 \section{Wstęp}
 Sortowanie to jeden z fundamentalnych problemów informatyki, mający szerokie zastosowanie w wielu dziedzinach. Algorytmy sortowania odgrywają kluczową rolę w wielu aplikacjach, a ich wydajność istotnie wpływa na czas działania. Wybór odpowiedniego algorytmu sortującego jest zatem istotną decyzją podczas tworzenia oprogramowania. W niniejszym sprawozdaniu przeanalizujemy trzy popularne algorytmy sortowania wraz z ich wybranymi modyfikacjami:
 \begin{itemize}
-    \item Insertion Sort
-    \item Merge Sort
-    \item Heap Sort
+    \item \texttt{Insertion Sort}
+    \item \texttt{Merge Sort}
+    \item \texttt{Heap Sort}
 \end{itemize}
 oraz porównamy ich efektywność na zestawach danych o różnych rozmiarach, badając liczbę operacji przypisań i porównań.
 
@@ -58,7 +58,7 @@ gdzie:
 \newpage
 \subsection{Insertion Sort}
 \textit{Insertion Sort} to algorytm działający w czasie $\Theta(n^2)$. Poniżej przedstawiamy kluczowy fragment jego implementacji:
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Insertion Sort}, label={lst:insertion}]
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Insertion Sort}}, label={lst:insertion}]
 void insertion_sort(float A[], int n)
 {
   for (int i = 1; i < n; ++i)
@@ -81,7 +81,7 @@ Rozważmy modyfikację algorytmu \textit{Insertion Sort} polegającą na jednocz
 
 \newpage
 
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Modyfikacji Insertion Sort}, label={lst:insertion2}]
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Modyfikacji \texttt{Insertion Sort}}, label={lst:insertion2}]
 void insertion_sort2(float A[], int n)
 {
   int size = n;
@@ -130,14 +130,14 @@ W tej modyfikacji algorytm przetwarza elementy tablicy parami, co umożliwia jed
 
 W przypadku tablicy o parzystej liczbie elementów algorytm wykonuje dodatkowy krok: wstawia ostatni element tablicy do pozostałej części. Intuicyjnie, zmniejszenie liczby iteracji powinno skutkować mniejszą liczbą porównań i przypisań, co powinno wpłynąć na zwiększenie efektywności algorytmu.
 
-Zakładając, bez utraty ogólności, że na wejściu otrzymujemy tablicę o nieparzystej liczbie elementów \( n \), w pesymistycznym przypadku w każdej iteracji pętli \textbf{for} wykonujemy około 9 operacji oraz 4 operacje za każdą iterację w pętli \textbf{while}. Możemy zatem ilość operacji zapisać jako sumę:
+Zakładając, bez utraty ogólności, że na wejściu otrzymujemy tablicę o nieparzystej liczbie elementów $n$, w pesymistycznym przypadku w każdej iteracji pętli \textbf{for} wykonujemy około 9 operacji oraz 4 operacje za każdą iterację w pętli \textbf{while}. Możemy zatem ilość operacji zapisać jako sumę:
 \[
     T(n) = \sum_{i=1}^{\frac{n-1}{2}} 4i + 9 = 4 \cdot \frac{\left(\frac{n-1}{2}\right)\left(\frac{n-1}{2} + 1\right)}{2} + 9 \cdot \frac{n-1}{2} = \Theta(n^2)
 \]
 
-W przypadku gdy tablica ma parzystą długość, dodajemy dodatkowe \( 4(n-1) \) operacji, co nie zmienia ogólnej złożoności algorytmu.
+W przypadku gdy tablica ma parzystą długość, dodajemy dodatkowe $4(n-1)$ operacji, co nie zmienia ogólnej złożoności algorytmu.
 \subsubsection{Wyniki dla Insertion Sort}
-Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu Insertion Sort oraz jego modyfikacji na tablicach o różnej wielkości:
+Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Insertion Sort} oraz jego modyfikacji na tablicach o różnej wielkości:
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|c|}
@@ -150,9 +150,9 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu Insertion Sor
     10,000 & 50,094,315 & 50,084,316 & 100,178,631 \\ \hline
     50,000 & 1,246,816,445 & 1,246,816,446 & 2,493,582,891 \\ \hline
     80,000 & 3,200,278,104 & 3,200,278,105 & 6,400,476,209 \\ \hline
-    100,000 & 5,000,376,268 & 5,000,376,261 & 10,000,652,537 \\ \hline
+    100,000 & 5,000,376,268 & 5,000,376,269 & 10,000,652,537 \\ \hline
     \end{tabular}
-    \caption{Liczba operacji dla algorytmu Insertion Sort przy różnych rozmiarach tablicy}
+    \caption{Liczba operacji dla algorytmu \texttt{Insertion Sort} przy różnych rozmiarach tablicy}
     \label{tab:insertion_results}
 \end{table}
 
@@ -170,10 +170,10 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu Insertion Sor
     80,000 & 2,131,445,810 & 2,131,405,792 & 4,262,851,602 \\ \hline
     100,000 & 3,332,835,201 & 3,332,785,140 & 6,665,620,341 \\ \hline
     \end{tabular}
-    \caption{Liczba operacji dla modyfikacji algorytmu Insertion Sort przy różnych rozmiarach tablicy}
+    \caption{Liczba operacji dla modyfikacji algorytmu \texttt{Insertion Sort} przy różnych rozmiarach tablicy}
     \label{tab:m_insertion_results}
 \end{table}
-Co ciekawe, dla tablicy o długości \( n \) algorytm Insertion Sort wykonuje średnio $n^2$ operacji. Z tabeli jednoznacznie wynika, że modyfikacja algorytmu Insertion Sort jest bardziej wydajna dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:insertion}.
+Co ciekawe, dla tablicy o długości $n$ algorytm \textit{Insertion Sort} wykonuje średnio $n^2$ operacji. Z tabeli jednoznacznie wynika, że modyfikacja algorytmu \textit{Insertion Sort} jest bardziej wydajna dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:insertion}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figure_1.png}
@@ -181,8 +181,8 @@ Co ciekawe, dla tablicy o długości \( n \) algorytm Insertion Sort wykonuje ś
     \label{fig:insertion}
 \end{figure}
 \subsection{Merge Sort}
-\textit{Merge Sort} to algorytm sortowania działający w czasie \( \Theta(n \log n) \). Poniżej przedstawiamy kluczowy fragment jego implementacji:
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Merge Sort}, label={lst:mergesort}]
+\textit{Merge Sort} to algorytm sortowania działający w czasie $\Theta(n \log n)$. Poniżej przedstawiamy kluczowy fragment jego implementacji:
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Merge Sort}}, label={lst:mergesort}]
 void merge_sort(float A[], int p, int k)
 {
   if (p < k)
@@ -196,11 +196,11 @@ void merge_sort(float A[], int p, int k)
 \end{lstlisting}
 Algorytm działa poprzez rekurencyjne dzielenie tablicy na dwie podtablice aż do momentu, gdy każda z nich ma tylko jeden element. Takie tablice jednoelementowe są naturalnie posortowane. Następnie następuje proces łączenia dwóch posortowanych podtablic w jedną większą.
 
-Funkcja \texttt{merge}, odpowiedzialna za łączenie posortowanych podtablic, jest zdefiniowana w następujący sposób:
+Funkcja \textbf{MERGE}, odpowiedzialna za łączenie posortowanych podtablic, jest zdefiniowana w następujący sposób:
 
 \newpage
  
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Merge}, label={lst:merge}]
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Merge}}, label={lst:merge}]
 void merge(float A[], int p, int s, int k)
 {
   int n1 = s - p + 1;
@@ -234,11 +234,11 @@ void merge(float A[], int p, int s, int k)
   }
 } 
 \end{lstlisting}
-Funkcja \texttt{merge} przypisuje elementy z tablicy \( A[p \ldots s] \) do tablicy \( L \) oraz elementy z tablicy \( A[s+1 \ldots k] \) do tablicy \( R \). Następnie iteruje przez tablice \( L \) i \( R \), wybierając za każdym razem mniejszy element i wstawiając go w odpowiednie miejsce w tablicy \( A \). Na wyjściu otrzymujemy posortowaną tablicę, składającą się z elementów \( A[p \ldots s] \) i \( A[s+1 \ldots k] \).
+Funkcja \textbf{MERGE} przypisuje elementy z tablicy $A[p \ldots s]$ do tablicy $L$ oraz elementy z tablicy $A[s+1 \ldots k]$ do tablicy $R$. Następnie iteruje przez tablice $L$ i $R$, wybierając za każdym razem mniejszy element i wstawiając go w odpowiednie miejsce w tablicy $A$. Na wyjściu otrzymujemy posortowaną tablicę, składającą się z elementów $A[p \ldots s]$ i $A[s+1 \ldots k]$.
 \subsubsection{Modyfikacja Merge Sort}
-W tej modyfikacji algorytm dzieli tablicę na trzy części zamiast dwóch. Kluczowe różnice w implementacji tego algorytmu w porównaniu do oryginalnej wersji obejmuje dodanie nowych miejsc podziału oraz dodanie dodatkowego rekurencyjnego wywołania w funkcji \texttt{merge\_sort}:
+W tej modyfikacji algorytm dzieli tablicę na trzy części zamiast dwóch. Kluczowe różnice w implementacji tego algorytmu w porównaniu do oryginalnej wersji obejmuje dodanie nowych miejsc podziału oraz dodanie dodatkowego rekurencyjnego wywołania w funkcji \textbf{MERGE\_SORT}:
 
-\begin{lstlisting}[style=mystyle, language=C++, caption={Fragment implementacji modyfikacji Merge Sort}, label={lst:mergesort2}]
+\begin{lstlisting}[style=mystyle, language=C++, caption={Fragment implementacji modyfikacji \texttt{Merge Sort}}, label={lst:mergesort2}]
 int s1 = p + (k - p) / 3;
 int s2 = p + 2 * ((k - p) / 3);
 merge_sort(A, p, s1);
@@ -247,13 +247,13 @@ merge_sort(A, s2 + 1, k);
 merge(A, p, s1, s2, k);
 \end{lstlisting}
 
-Dodatkowo w funkcji \texttt{merge} wprowadzamy nową tablicę \( M \):
-\begin{lstlisting}[style=mystyle, language=C++, caption={Fragment implementacji modyfikacji Merge}, label={lst:merge2}]
+Dodatkowo w funkcji \textbf{MERGE} wprowadzamy nową tablicę $M$:
+\begin{lstlisting}[style=mystyle, language=C++, caption={Fragment implementacji modyfikacji \texttt{Merge}}, label={lst:merge2}]
 float M[n2 + 1];
 \end{lstlisting}
 
 Działanie zmienionej funkcji jest analogiczne do oryginalnej, z tą różnicą, że łączenie odbywa się teraz dla trzech tablic zamiast dwóch:
-\begin{lstlisting}[style=mystyle, language=C++, caption={Fragment implementacji modyfikacji Merge}, label={lst:merge2l}]
+\begin{lstlisting}[style=mystyle, language=C++, caption={Fragment implementacji modyfikacji \texttt{Merge}}, label={lst:merge2l}]
 int i = 0;
 int j = 0;
 int z = 0;
@@ -277,7 +277,7 @@ for (int l = p; l <= k; ++l)
     }
 }
 \end{lstlisting}
-Ilość operacji wykonywanych przez modyfikację algorytmu Merge możemy opisać poprzez rekurencyjne równanie:
+Ilość operacji wykonywanych przez modyfikację algorytmu \textit{Merge Sort} możemy opisać poprzez rekurencyjne równanie:
 \[
     T(n) = 3T(n/3) + n
 \]
@@ -287,7 +287,7 @@ Możemy zatem zapisać:
 \]
 Intuicyjnie, dzięki szybszemu przejściu do zbiorów jednoelementowych, modyfikacja powinna być bardziej efektywny od orginału.
 \subsubsection{Wyniki dla Merge Sort}
-Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu Merge Sort oraz jego modyfikacji na tablicach o różnej wielkości:
+Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Merge Sort} oraz jego modyfikacji na tablicach o różnej wielkości:
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|c|}
@@ -302,7 +302,7 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu Merge Sort or
     80,000 & 7,504,628 & 4,326,780 & 11,831,408 \\ \hline
     100,000 & 9,544,628 & 5,506,780 & 15,051,408 \\ \hline
     \end{tabular}
-    \caption{Liczba operacji dla algorytmu Merge Sort przy różnych rozmiarach tablicy}
+    \caption{Liczba operacji dla algorytmu \texttt{Merge Sort} przy różnych rozmiarach tablicy}
     \label{tab:merge_results}
 \end{table}
 
@@ -320,11 +320,11 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu Merge Sort or
     80,000 & 5,238,096 & 4,635,715 & 9,873,811 \\ \hline
     100,000 & 6,706,625 & 5,931,401 & 12,638,026 \\ \hline
     \end{tabular}
-    \caption{Liczba operacji dla modyfikacji algorytmu Merge Sort przy różnych rozmiarach tablicy}
+    \caption{Liczba operacji dla modyfikacji algorytmu \texttt{Merge Sort} przy różnych rozmiarach tablicy}
     \label{tab:m_merge_results}
 \end{table}
 
-Z tabel wynika, że modyfikacja algorytmu Merge Sort jest bardziej wydajna dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:merge}.
+Z tabel wynika, że modyfikacja algorytmu \textit{Merge Sort} jest bardziej wydajna dla większych tablic. Co ciekawe, ilość porównań w modyfikacji algorytmu \textit{Merge Sort} rośnie szybciej niż w orginalym algorytmie. Różnice w ilości wykonanych operacji są dobrze zobrazowane na Wykresie \ref{fig:merge}.
 
 \begin{figure}[H]
     \centering
@@ -333,8 +333,8 @@ Z tabel wynika, że modyfikacja algorytmu Merge Sort jest bardziej wydajna dla w
     \label{fig:merge}
 \end{figure}
 \subsection{Heap Sort}
-\textit{Heap Sort} to algorytm sortowania działający w czasie \( \bigO (n \log n) \). Poniżej przedstawiamy kluczowy fragment jego implementacji:
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Heap Sort}, label={lst:heapsort}]
+\textit{Heap Sort} to algorytm sortowania działający w czasie $\bigO (n \log n)$. Poniżej przedstawiamy kluczowy fragment jego implementacji:
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Heap Sort}}, label={lst:heapsort}]
 void heap_sort(heap &A, int n)
 {
   build_heap(A, n);
@@ -352,7 +352,7 @@ Algorytm jest oparty na strukturze kopca binarnego (dokładniej, na kopcu typu m
 
 \newpage
 
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Heap}, label={lst:heap}]
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Heap}}, label={lst:heap}]
 struct heap
 {
   float *array;
@@ -368,8 +368,8 @@ struct heap
   }
 };
 \end{lstlisting}
-Dodatkowo definiujemy dwie funkcje \textbf{left} oraz \textbf{right} zwracające lewe i prawe dziecko węzła o indeksie \( i \):
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Left i Right}, label={lst:lr}]
+Dodatkowo definiujemy dwie funkcje \textbf{LEFT} oraz \textbf{RIGHT} zwracające lewe i prawe dziecko węzła o indeksie $i$:
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Left} i \texttt{Right}}, label={lst:lr}]
 int left(int i)
 {
   return 2 * i + 1;
@@ -380,8 +380,8 @@ int right(int i)
   return 2 * i + 2;
 }
 \end{lstlisting}
-Definiujemy również funkcję \textbf{heapify}, która rekurencyjnie naprawia własność \textbf{MAX\_HEAP} dla węzła o indeksie \( i \), pod warunkiem, że poddrzewa o wierzchołkach będących dziećmi węzła o indeksie \( i \) mają już własność \textbf{MAX\_HEAP}. Funkcja działa poprzez zamianę węzła z dzieckiem o największej wartości, jeśli jest to konieczne:
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Heapify}, label={lst:heapify}]
+Definiujemy również funkcję \textbf{HEAPIFY}, która rekurencyjnie naprawia własność \textbf{MAX\_HEAP} dla węzła o indeksie $i$, pod warunkiem, że poddrzewa o wierzchołkach będących dziećmi węzła o indeksie $i$ mają już własność \textbf{MAX\_HEAP}. Funkcja działa poprzez zamianę węzła z dzieckiem o największej wartości, jeśli jest to konieczne:
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Heapify}}, label={lst:heapify}]
 void heapify(heap &A, int i)
 {
   int l = left(i);
@@ -402,9 +402,9 @@ void heapify(heap &A, int i)
   }
 }
 \end{lstlisting}
-Algorytm działa poprzez zbudowanie kopca z tablicy \textbf{A} przy pomocy funkcji \textbf{build\_heap}, która wywołuje funkcję \textbf{heapify} dla każdego węzła, który nie jest liściem:
+Algorytm działa poprzez zbudowanie kopca z tablicy $A$ przy pomocy funkcji \textbf{BUILD\_HEAP}, która wywołuje funkcję \textbf{HEAPIFY} dla każdego węzła, który nie jest liściem:
 
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Build Heap}, label={lst:buildheap}]
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Build Heap}}, label={lst:buildheap}]
 void build_heap(heap &A, int n)
 {
   A.heap_size = n;
@@ -415,10 +415,10 @@ void build_heap(heap &A, int n)
 }
 \end{lstlisting}
 
-Następnie, algorytm iteracyjnie zamienia wierzchołek (największy element) z ostatnim liściem (węzłem o największym indeksie), wywołuje funkcję \textbf{heapify} na wierzchołku oraz zmniejsza parametr \textbf{heap\_size} o jeden. Po zakończeniu pętli \textbf{for} otrzymujemy posortowaną tablicę \textbf{A}.
+Następnie, algorytm iteracyjnie zamienia wierzchołek (największy element) z ostatnim liściem (węzłem o największym indeksie), wywołuje funkcję \textbf{HEAPIFY} na wierzchołku oraz zmniejsza parametr \textbf{heap\_size} o jeden. Po zakończeniu pętli \textbf{for} otrzymujemy posortowaną tablicę $A$.
 \subsubsection{Modyfikacja Heap Sort}
 W tej modyfikacji algorytm używa kopców trenarnych zamiast binarnych. Kluczowe różnice w implementacji tego algorytmu w porównaniu do oryginalnej wersji obejmuje dodanie funkcji \textbf{MID}, która zwraca środkowe dziecko węzła, oraz zmiana kodu funkcji \textbf{LEFT} i \textbf{RIGHT}:
-\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Left, Mid i Right}, label={lst:lmr}]
+\begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Left}, \texttt{Mid} i \texttt{Right}}, label={lst:lmr}]
 int left(int i)
 {
   return 3 * i + 1;
@@ -436,7 +436,7 @@ int right(int i)
 }
 \end{lstlisting}
 Dodatkowo, w funkcji \textbf{HEAPIFY} wybieramy największe dziecko z trzech zamiast dwóch:
-\begin{lstlisting}[style=mystyle, language=C++, caption={Część implementacji zmodyfikowanego Heapify}, label={lst:buildheap2}]
+\begin{lstlisting}[style=mystyle, language=C++, caption={Część implementacji zmodyfikowanego \texttt{Heapify}}, label={lst:buildheap2}]
   int l = left(i);
   int m = mid(i);
   int r = right(i);
@@ -455,12 +455,12 @@ Dodatkowo, w funkcji \textbf{HEAPIFY} wybieramy największe dziecko z trzech zam
     largest = r;
   }
 \end{lstlisting}
-Reszta kodu pozostaje analogiczna. Dzięki posiadaniu większej liczby liści w kopcu trenarnym, efektywność modyfikacji algorytmu powinna być wyższa.
+Reszta kodu pozostaje analogiczna. Dzięki posiadaniu większej liczby liści w kopcu trenarnym, które są pomijane w procedurze \textbf{BUILD\_HEAP}, efektywność modyfikacji algorytmu powinna być wyższa.
 
-\textbf{BUILD\_HEAP} działa w czasie \( \bigO(n) \), zatem zmodyfikowany algorytm działa w czasie \( \bigO (n \log n) \).
+\textbf{BUILD\_HEAP} działa w czasie $\bigO(n)$, zatem zmodyfikowany algorytm działa w czasie $\bigO (n \log n)$.
 
 \subsubsection{Wyniki dla Heap Sort}
-Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu Heap Sort oraz jego modyfikacji na tablicach o różnej wielkości:
+Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Heap Sort} oraz jego modyfikacji na tablicach o różnej wielkości:
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|c|}
@@ -475,7 +475,7 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu Heap Sort ora
     80,000 & 9,412,168 & 6,487,715 & 15,899,883 \\ \hline
     100,000 & 12,012,335 & 8,274,443 & 20,286,778 \\ \hline
     \end{tabular}
-    \caption{Liczba operacji dla algorytmu Heap Sort przy różnych rozmiarach tablicy}
+    \caption{Liczba operacji dla algorytmu \texttt{Heap Sort} przy różnych rozmiarach tablicy}
     \label{tab:heap_results}
 \end{table}
 
@@ -493,11 +493,11 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu Heap Sort ora
     80,000 & 7,338,882 & 6,037,845 & 13,376,727 \\ \hline
     100,000 & 9,348,531 & 7,686,258 & 17,034,789 \\ \hline
     \end{tabular}
-    \caption{Liczba operacji dla modyfikacji algorytmu Heap Sort przy różnych rozmiarach tablicy}
+    \caption{Liczba operacji dla modyfikacji algorytmu \texttt{Heap Sort} przy różnych rozmiarach tablicy}
     \label{tab:m_heap_results}
 \end{table}
 
-Z tabel wynika, że modyfikacja algorytmu Heap Sort jest bardziej wydajna dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:heap}.
+Z tabel wynika, że modyfikacja algorytmu \textit{Heap Sort} jest bardziej wydajna dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:heap}.
 
 \begin{figure}[H]
     \centering
