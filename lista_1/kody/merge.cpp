@@ -3,7 +3,7 @@
 using namespace std;
 
 int assignments = 0;
-int comparisions = 0;
+int comparisons = 0;
 
 void merge(float A[], int p, int s, int k)
 {
@@ -14,33 +14,33 @@ void merge(float A[], int p, int s, int k)
   L[n1] = numeric_limits<float>::infinity();
   R[n2] = numeric_limits<float>::infinity();
   assignments += 6;
-  comparisions += 1;
+  comparisons += 1;
   assignments += 1;
   for (int i = 0; i < n1; ++i)
   {
     assignments += 1;
     L[i] = A[i + p];
     assignments += 1;
-    comparisions += 1;
+    comparisons += 1;
   }
-  comparisions += 1;
+  comparisons += 1;
   assignments += 1;
   for (int j = 0; j < n2; ++j)
   {
     assignments += 1;
     R[j] = A[j + s + 1];
     assignments += 1;
-    comparisions += 1;
+    comparisons += 1;
   }
   int i = 0;
   int j = 0;
   assignments += 2;
-  comparisions += 1;
+  comparisons += 1;
   assignments += 1;
   for (int l = p; l <= k; ++l)
   {
     assignments += 1;
-    comparisions += 2;
+    comparisons += 2;
     if (L[i] <= R[j])
     {
       A[l] = L[i];
@@ -58,7 +58,7 @@ void merge(float A[], int p, int s, int k)
 
 void merge_sort(float A[], int p, int k)
 {
-  comparisions += 1;
+  comparisons += 1;
   if (p < k)
   {
     int s = p + (k - p) / 2;
@@ -81,10 +81,10 @@ int main()
   merge_sort(A, 0, n - 1);
   cout << n << " ";
   cout << assignments << " ";
-  cout << comparisions << " ";
+  cout << comparisons << " ";
   for (int i = 0; i < n; ++i)
   {
-    cout << A[i] << " ";
+    cout << std::fixed << A[i] << " ";
   }
   return 0;
 }

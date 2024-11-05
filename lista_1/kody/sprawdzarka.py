@@ -2,7 +2,7 @@
 A = []
 i = 0
 length = 0
-comparisions = 0
+comparisons = 0
 assignments = 0
 for str in input().split():
   if i == 0:
@@ -12,9 +12,9 @@ for str in input().split():
     assignments = int(str)
     i += 1
   elif i == 2:
-    comparisions = int(str)
+    comparisons = int(str)
     i += 1
   else:
     A.append(float(str))
 isSorted = sorted(A) == A
-print(f"Czy posortowany? {isSorted} \nDlugość tablicy: {length} \nIlość przypisań: {assignments} \nIlość porównań: {comparisions}")
+print(f"Czy posortowany? {isSorted} \nDlugość tablicy: {length} \nIlość przypisań: {assignments} \nIlość porównań: {comparisons}")

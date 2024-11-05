@@ -7,7 +7,7 @@ Y = []
 params = [2, 5, 10, 100, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
 for param in params:
     print(param)
-    comparisions = []
+    comparisons = []
     assignments = []
     for i in range(10):
       subprocess.run(f'python3 generator.py {param}')
@@ -23,9 +23,9 @@ for param in params:
       p = check_result.stdout.split(" ")
       print(p)
       assignments.append(int(p[8]))
-      comparisions.append(int(p[11].strip()))
+      comparisons.append(int(p[11].strip()))
     spr = math.ceil(sum(assignments)/len(assignments))
-    spp = math.ceil(sum(comparisions)/len(comparisions))
+    spp = math.ceil(sum(comparisons)/len(comparisons))
     Y.append(spr+spp)
     print(f'Wielkość tablicy: {param} \
     Średnia ilość przypisań: {spr} \

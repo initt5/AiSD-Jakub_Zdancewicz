@@ -2,7 +2,7 @@
 using namespace std;
 
 unsigned long int assignments = 0;
-unsigned long int comparisions = 0;
+unsigned long int comparisons = 0;
 
 void insertion_sort2(float A[], int n)
 {
@@ -12,9 +12,9 @@ void insertion_sort2(float A[], int n)
   {
     size -= 1;
     assignments += 1;
-    comparisions += 1;
+    comparisons += 1;
   }
-  comparisions += 1;
+  comparisons += 1;
   assignments += 1;
   for (int i = 1; i < size; i += 2)
   {
@@ -27,44 +27,44 @@ void insertion_sort2(float A[], int n)
       float temp = max;
       max = min;
       min = temp;
-      comparisions += 1;
+      comparisons += 1;
       assignments += 3;
     }
-    comparisions += 1;
+    comparisons += 1;
     int j = i - 1;
     assignments += 1;
-    comparisions += 2;
+    comparisons += 2;
     while (j > -1 && A[j] > max)
     {
-      comparisions += 2;
+      comparisons += 2;
       A[j + 2] = A[j];
       --j;
       assignments += 2;
     }
     A[j + 2] = max;
     assignments += 1;
-    comparisions += 2;
+    comparisons += 2;
     while (j > -1 && A[j] > min)
     {
-      comparisions += 2;
+      comparisons += 2;
       A[j + 1] = A[j];
       --j;
       assignments += 2;
     }
     A[j + 1] = min;
     assignments += 1;
-    comparisions += 1;
+    comparisons += 1;
   }
-  comparisions += 1;
+  comparisons += 1;
   if (n % 2 == 0)
   {
     int j = n - 2;
     float key = A[n - 1];
     assignments += 2;
-    comparisions += 2;
+    comparisons += 2;
     while (j > -1 && A[j] > key)
     {
-      comparisions += 2;
+      comparisons += 2;
       A[j + 1] = A[j];
       --j;
       assignments += 2;
@@ -86,10 +86,10 @@ int main()
   insertion_sort2(A, n);
   cout << n << " ";
   cout << assignments << " ";
-  cout << comparisions << " ";
+  cout << comparisons << " ";
   for (int i = 0; i < n; ++i)
   {
-    cout << A[i] << " ";
+    cout << std::fixed << A[i] << " ";
   }
   return 0;
 }
