@@ -6,17 +6,9 @@ unsigned long int comparisons = 0;
 
 void insertion_sort2(float A[], int n)
 {
-  int size = n;
-  assignments += 1;
-  if (n % 2 == 0)
-  {
-    size -= 1;
-    assignments += 1;
-    comparisons += 1;
-  }
   comparisons += 1;
   assignments += 1;
-  for (int i = 1; i < size; i += 2)
+  for (int i = 1; i < n; i += 2)
   {
     assignments += 1;
     float max = A[i];

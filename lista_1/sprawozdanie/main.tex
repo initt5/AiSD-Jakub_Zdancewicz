@@ -84,12 +84,7 @@ Rozważmy modyfikację algorytmu \textit{Insertion Sort} polegającą na jednocz
 \begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja Modyfikacji \texttt{Insertion Sort}}, label={lst:insertion2}]
 void insertion_sort2(float A[], int n)
 {
-  int size = n;
-  if (n % 2 == 0)
-  {
-    size -= 1;
-  }
-  for (int i = 1; i < size; i += 2)
+  for (int i = 1; i < n; i += 2)
   {
     float max = A[i];
     float min = A[i + 1];
