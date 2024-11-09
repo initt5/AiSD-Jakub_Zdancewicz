@@ -44,9 +44,9 @@ oraz porównamy ich efektywność na zestawach danych o różnych rozmiarach, ba
 
 
 \section{Opis zaimplementowanych algorytmów}
-Każdy z algorytmów został przetestowany na 10 losowo wygenerowanych tablicach dla każdej z 15 wybranych długości. Elementy tablic to liczby wymierne z zakresu $[-10^6, 10^6]$. Minimalna długość tablicy wynosiła 2, a maksymalna 100000. Średnia liczba operacji przypisań i porównań dla tablic o danej długości $n$ jest wyliczana według wzoru:
+Każdy z algorytmów został przetestowany na 10 losowo wygenerowanych tablicach dla każdej z 15 wybranych długości. Elementy tablic to liczby wymierne z zakresu $[-10^6, 10^6]$. Minimalna długość tablicy wynosiła 2, a maksymalna 100000. Średnia liczba operacji przypisań i porównań dla $m$ tablic o danej długości $n$ jest wyliczana według wzoru:
 \[
-    L_n = \sum_{i=1}^{10} \left\lceil\frac{porownania_i}{10}\right\rceil + \left\lceil\frac{przypisania_i}{10}\right\rceil
+    L_n = \sum_{i=1}^{m} \left\lceil\frac{porownania_i}{m}\right\rceil + \left\lceil\frac{przypisania_i}{m}\right\rceil
 \]
 gdzie:
 \begin{itemize}
@@ -54,7 +54,7 @@ gdzie:
     \item[] $\text{porownania}_i$ - liczba porównań wykonanych dla i-tej tablicy,
     \item[] $\text{przypisania}_i$ - liczba przypisań wykonanych dla i-tej tablicy.
 \end{itemize}
-
+Analogicznie obliczamy średni czas wykonania algorytmu dla $m$ tablic o danej długości $n$.
 \newpage
 \subsection{Insertion Sort}
 \textit{Insertion Sort} to algorytm działający w czasie $\Theta(n^2)$. Poniżej przedstawiamy kluczowy fragment jego implementacji:
@@ -135,45 +135,55 @@ W przypadku gdy tablica ma parzystą długość, dodajemy dodatkowe $4(n-1)$ ope
 Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Insertion Sort} oraz jego modyfikacji na tablicach o różnej wielkości:
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|}
+    \scalebox{0.9}{
+    \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} \\ \hline
-    5 & 29 & 25 & 54 \\ \hline
-    10 & 80 & 71 & 151 \\ \hline
-    100 & 5,342 & 5,343 & 10,585 \\ \hline
-    5,000 & 12,610,131 & 12,610,132 & 25,215,263 \\ \hline
-    10,000 & 50,094,315 & 50,084,316 & 100,178,631 \\ \hline
-    50,000 & 1,246,816,445 & 1,246,816,446 & 2,493,582,891 \\ \hline
-    80,000 & 3,200,278,104 & 3,200,278,105 & 6,400,476,209 \\ \hline
-    100,000 & 5,000,376,268 & 5,000,376,269 & 10,000,652,537 \\ \hline
+    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} & \textbf{Czas (ms)} \\ \hline
+    5 & 29 & 25 & 54 & 0 \\ \hline
+    10 & 80 & 71 & 151 & 0 \\ \hline
+    100 & 5,342 & 5,343 & 10,585 & 0 \\ \hline
+    5,005 & 12,610,131 & 12,610,132 & 25,215,263 & 17.9 \\ \hline
+    10,000 & 50,094,315 & 50,084,316 & 100,178,631 & 73.3 \\ \hline
+    50,005 & 1,246,816,445 & 1,246,816,446 & 2,493,582,891 & 2486.5 \\ \hline
+    80,000 & 3,200,278,104 & 3,200,278,105 & 6,400,476,209 & 5640.4 \\ \hline
+    100,000 & 5,000,376,268 & 5,000,376,269 & 10,000,652,537 & 9577.2 \\ \hline
     \end{tabular}
+    }
     \caption{Liczba operacji dla algorytmu \texttt{Insertion Sort} przy różnych rozmiarach tablicy}
     \label{tab:insertion_results}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|}
+    \scalebox{0.9}{
+    \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} \\ \hline
-    5 & 23 & 21 & 44 \\ \hline
-    10 & 66 & 61 & 127 \\ \hline
-    100 & 3,656 & 3,605 & 7,261 \\ \hline
-    5,000 & 8,350,361 & 8,347,866 & 16,698,227 \\ \hline
-    10,000 & 33,267,559 & 33,262,542 & 66,530,101 \\ \hline
-    50,000 & 833,429,925 & 833,404,889 & 1,666,834,814 \\ \hline
-    80,000 & 2,131,445,810 & 2,131,405,792 & 4,262,851,602 \\ \hline
-    100,000 & 3,332,835,201 & 3,332,785,140 & 6,665,620,341 \\ \hline
+    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} & \textbf{Czas (ms)} \\ \hline
+    5 & 23 & 21 & 44 & 0 \\ \hline
+    10 & 66 & 61 & 127 & 0 \\ \hline
+    100 & 3,656 & 3,605 & 7,261 & 0 \\ \hline
+    5,005 & 8,350,361 & 8,347,866 & 16,698,227 & 12.1 \\ \hline
+    10,000 & 33,267,559 & 33,262,542 & 66,530,101 & 48.4 \\ \hline
+    50,005 & 833,429,925 & 833,404,889 & 1,666,834,814 & 1355.2 \\ \hline
+    80,000 & 2,131,445,810 & 2,131,405,792 & 4,262,851,602 & 3513.2 \\ \hline
+    100,000 & 3,332,835,201 & 3,332,785,140 & 6,665,620,341 & 5673.5 \\ \hline
     \end{tabular}
+    }
     \caption{Liczba operacji dla modyfikacji algorytmu \texttt{Insertion Sort} przy różnych rozmiarach tablicy}
     \label{tab:m_insertion_results}
 \end{table}
-Co ciekawe, dla tablicy o długości $n$ algorytm \textit{Insertion Sort} wykonuje średnio $n^2$ operacji. Z tabeli jednoznacznie wynika, że modyfikacja algorytmu \textit{Insertion Sort} jest wydajniejsza dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:insertion}.
+Co ciekawe, dla tablicy o długości $n$ algorytm \textit{Insertion Sort} wykonuje średnio $n^2$ operacji. Z tabeli jednoznacznie wynika, że modyfikacja algorytmu \textit{Insertion Sort} jest wydajniejsza dla większych tablic. Różnice te są dobrze zobrazowane na Wykresach \ref{fig:insertion} oraz \ref{fig:insertiont}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figure_1.png}
     \caption{Ilość operacji w zależności od rozmiarów tablicy wejściowej}
     \label{fig:insertion}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_5.png}
+    \caption{Czas wykonania algorytmu w zależności od rozmiarów tablicy wejściowej}
+    \label{fig:insertiont}
 \end{figure}
 \subsection{Merge Sort}
 \textit{Merge Sort} to algorytm sortowania działający w czasie $\Theta(n \log n)$. Poniżej przedstawiamy kluczowy fragment jego implementacji:
@@ -285,47 +295,57 @@ Intuicyjnie, dzięki szybszemu przejściu do zbiorów jednoelementowych, modyfik
 Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Merge Sort} oraz jego modyfikacji na tablicach o różnej wielkości:
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|}
+    \scalebox{0.9}{
+    \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} \\ \hline
-    5 & 108 & 57 & 165 \\ \hline
-    10 & 278 & 148 & 426 \\ \hline
-    100 & 4,548 & 2,512 & 7,060 \\ \hline
-    5,000 & 369,028 & 210,420 & 579,448 \\ \hline
-    10,000 & 788,068 & 450,844 & 1,238,912 \\ \hline
-    50,000 & 4,522,308 & 2,603,388 & 7,125,696 \\ \hline
-    80,000 & 7,504,628 & 4,326,780 & 11,831,408 \\ \hline
-    100,000 & 9,544,628 & 5,506,780 & 15,051,408 \\ \hline
+    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} & \textbf{Czas (ms)}\\ \hline
+    5 & 108 & 57 & 165 & 0  \\ \hline
+    10 & 278 & 148 & 426 & 0 \\ \hline
+    100 & 4,548 & 2,512 & 7,060 & 0 \\ \hline
+    5,005 & 369,028 & 210,420 & 579,448 & 0.5 \\ \hline
+    10,000 & 788,068 & 450,844 & 1,238,912 & 1.4 \\ \hline
+    50,005 & 4,522,308 & 2,603,388 & 7,125,696 & 10.5 \\ \hline
+    80,000 & 7,504,628 & 4,326,780 & 11,831,408 & 17.8 \\ \hline
+    100,000 & 9,544,628 & 5,506,780 & 15,051,408 & 22.3 \\ \hline
     \end{tabular}
+    }
     \caption{Liczba operacji dla algorytmu \texttt{Merge Sort} przy różnych rozmiarach tablicy}
     \label{tab:merge_results}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|}
+    \scalebox{0.9}{
+    \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} \\ \hline
-    5 & 99 & 67 & 166 \\ \hline
-    10 & 256 & 180 & 436 \\ \hline
-    100 & 3,560 & 2,791 & 6,351 \\ \hline
-    5,000 & 277,738 & 234,773 & 512,511 \\ \hline
-    10,000 & 555,727 & 481,819 & 1,037,546 \\ \hline
-    50,000 & 3,318,096 & 2,880,715 & 6,198,811 \\ \hline
-    80,000 & 5,238,096 & 4,635,715 & 9,873,811 \\ \hline
-    100,000 & 6,706,625 & 5,931,401 & 12,638,026 \\ \hline
+    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} & \textbf{Czas (ms)} \\ \hline
+    5 & 99 & 67 & 166 & 0 \\ \hline
+    10 & 256 & 180 & 436 & 0 \\ \hline
+    100 & 3,560 & 2,791 & 6,351 & 0 \\ \hline
+    5,005 & 277,738 & 234,773 & 512,511 & 0.4 \\ \hline
+    10,000 & 555,727 & 481,819 & 1,037,546 & 1.3 \\ \hline
+    50,005 & 3,318,096 & 2,880,715 & 6,198,811 & 9.1 \\ \hline
+    80,000 & 5,238,096 & 4,635,715 & 9,873,811 & 14.7 \\ \hline
+    100,000 & 6,706,625 & 5,931,401 & 12,638,026 & 18.4 \\ \hline
     \end{tabular}
+    }
     \caption{Liczba operacji dla modyfikacji algorytmu \texttt{Merge Sort} przy różnych rozmiarach tablicy}
     \label{tab:m_merge_results}
 \end{table}
 
-Z tabel wynika, że modyfikacja algorytmu \textit{Merge Sort} jest wydajniejsza dla większych tablic. Co ciekawe, ilość porównań w modyfikacji algorytmu \textit{Merge Sort} rośnie szybciej niż w orginalym algorytmie. Różnice w ilości wykonanych operacji są dobrze zobrazowane na Wykresie \ref{fig:merge}.
+Z tabel wynika, że modyfikacja algorytmu \textit{Merge Sort} jest wydajniejsza dla większych tablic. Co ciekawe, ilość porównań w modyfikacji algorytmu \textit{Merge Sort} rośnie szybciej niż w orginalym algorytmie. Różnice w ilości wykonanych operacji są dobrze zobrazowane na Wykresach \ref{fig:merge} oraz \ref{fig:merget}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figure_2.png}
     \caption{Ilość operacji w zależności od rozmiarów tablicy wejściowej}
     \label{fig:merge}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_6.png}
+    \caption{Czas działania algorytmu w zależności od rozmiarów tablicy wejściowej}
+    \label{fig:merget}
 \end{figure}
 \subsection{Heap Sort}
 \textit{Heap Sort} to algorytm sortowania działający w czasie $\bigO (n \log n)$. Poniżej przedstawiamy kluczowy fragment jego implementacji:
@@ -458,47 +478,57 @@ Reszta kodu pozostaje analogiczna. Dzięki posiadaniu większej liczby liści w 
 Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Heap Sort} oraz jego modyfikacji na tablicach o różnej wielkości:
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|}
+    \scalebox{0.9}{
+    \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} \\ \hline
-    5 & 85 & 70 & 155 \\ \hline
-    10 & 232 & 183 & 415 \\ \hline
-    100 & 4,562 & 3,308 & 7,870 \\ \hline
-    5,000 & 438,290 & 305,525 & 743,815 \\ \hline
-    10,000 & 951,673 & 661,035 & 1,612,708 \\ \hline
-    50,000 & 5,631,385 & 3,887,342 & 9,518,727 \\ \hline
-    80,000 & 9,412,168 & 6,487,715 & 15,899,883 \\ \hline
-    100,000 & 12,012,335 & 8,274,443 & 20,286,778 \\ \hline
+    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} & \textbf{Czas (ms)} \\ \hline
+    5 & 85 & 70 & 155 & 0 \\ \hline
+    10 & 232 & 183 & 415 & 0 \\ \hline
+    100 & 4,562 & 3,308 & 7,870 & 0 \\ \hline
+    5,005 & 438,290 & 305,525 & 743,815 & 1.4 \\ \hline
+    10,000 & 951,673 & 661,035 & 1,612,708 & 3.4 \\ \hline
+    50,005 & 5,631,385 & 3,887,342 & 9,518,727 & 22.6 \\ \hline
+    80,000 & 9,412,168 & 6,487,715 & 15,899,883 & 41.0 \\ \hline
+    100,000 & 12,012,335 & 8,274,443 & 20,286,778 & 50.2 \\ \hline
     \end{tabular}
+    }
     \caption{Liczba operacji dla algorytmu \texttt{Heap Sort} przy różnych rozmiarach tablicy}
     \label{tab:heap_results}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|c|c|c|}
+    \scalebox{0.9}{
+    \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} \\ \hline
-    5 & 83 & 78 & 161 \\ \hline
-    10 & 211 & 195 & 406 \\ \hline
-    100 & 3,803 & 3,290 & 7,093 \\ \hline
-    5,000 & 347,976 & 289,958 & 637,934 \\ \hline
-    10,000 & 749,096 & 621,005 & 1,370,101 \\ \hline
-    50,000 & 4,405,541 & 3,633,093 & 8,038,634 \\ \hline
-    80,000 & 7,338,882 & 6,037,845 & 13,376,727 \\ \hline
-    100,000 & 9,348,531 & 7,686,258 & 17,034,789 \\ \hline
+    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} & \textbf{Czas (ms)} \\ \hline
+    5 & 83 & 78 & 161 & 0 \\ \hline
+    10 & 211 & 195 & 406 & 0 \\ \hline
+    100 & 3,803 & 3,290 & 7,093 & 0 \\ \hline
+    5,005 & 347,976 & 289,958 & 637,934 & 0.9 \\ \hline
+    10,000 & 749,096 & 621,005 & 1,370,101 & 3.2 \\ \hline
+    50,005 & 4,405,541 & 3,633,093 & 8,038,634 & 20.2  \\ \hline
+    80,000 & 7,338,882 & 6,037,845 & 13,376,727 & 34.7 \\ \hline
+    100,000 & 9,348,531 & 7,686,258 & 17,034,789 & 45.9  \\ \hline
     \end{tabular}
+    }
     \caption{Liczba operacji dla modyfikacji algorytmu \texttt{Heap Sort} przy różnych rozmiarach tablicy}
     \label{tab:m_heap_results}
 \end{table}
 
-Z tabel wynika, że modyfikacja algorytmu \textit{Heap Sort} jest wydajniejsza dla większych tablic. Różnice te są dobrze zobrazowane na Wykresie \ref{fig:heap}.
+Z tabel wynika, że modyfikacja algorytmu \textit{Heap Sort} jest wydajniejsza dla większych tablic. Różnice te są dobrze zobrazowane na Wykresach \ref{fig:heap} oraz \ref{fig:heapt}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Figure_3.png}
     \caption{Ilość operacji w zależności od rozmiarów tablicy wejściowej}
     \label{fig:heap}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_7.png}
+    \caption{Czas działania algorytmu w zależności od rozmiarów tablicy wejściowej}
+    \label{fig:heapt}
 \end{figure}
 \section{Wnioski}
 Na podstawie przeprowadzonej analizy algorytmów, \textit{Insertion Sort} może być wydajny dla niewielkich zestawów danych, jednak w miarę zwiększania się rozmiaru tablicy liczba wykonywanych operacji rośnie nawet o trzy rzędy wielkości w porównaniu do \textit{Merge Sort} i \textit{Heap Sort}.
@@ -509,6 +539,12 @@ Porównując \textit{Merge Sort} i \textit{Heap Sort} możemy zauważyć, że pi
     \includegraphics[width=0.8\textwidth]{Figure_4.png}
     \caption{Ilość operacji w zależności od rozmiaru tablicy wejściowej}
     \label{fig:heapmerge}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_8.png}
+    \caption{Czas działania algorytmów w zależności od rozmiaru tablicy wejściowej}
+    \label{fig:heapmerget}
 \end{figure}
 Jednak \textit{Merge Sort} posiada jedną znaczącą wadę – złożoność pamięciową. Z powodu konieczności definiowania dodatkowych tablic \textbf{L} i \textbf{R}, ilość pamięci potrzebnej do działania algorytmu jest nieporównywalnie większa niż w przypadku \textit{Heap Sort}. Wybór odpowiedniego algorytmu zależy więc od dostępnych zasobów.
 

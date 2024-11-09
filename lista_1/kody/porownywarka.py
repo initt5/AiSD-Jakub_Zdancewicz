@@ -2,21 +2,23 @@ import subprocess
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+import sys
 
 Y = []
-params = [2, 5, 10, 100, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+params = [2, 5, 10, 100, 5005, 10000, 20000, 30003, 40000, 50005, 60000, 70007, 80000, 90009, 100000]
+n = int(sys.argv[1])
 for param in params:
     print(param)
     comparisons = []
     assignments = []
-    for i in range(10):
-      subprocess.run(f'python3 generator.py {param}')
+    for i in range(n):
+      subprocess.run(f'python generator.py {param}')
       cmd1 = ['./a']
       
       with open('input.txt', 'r') as input_file:
           result = subprocess.run(cmd1, stdin=input_file, capture_output=True, text=True)
 
-      cmd2 = ['python3', 'sprawdzarka.py']
+      cmd2 = ['python', 'sprawdzarka.py']
       check_result = subprocess.run(cmd2, input=result.stdout, capture_output=True, text=True)
 
       #print(f"Parametr: {param}, Wynik sprawdzarki: {check_result.stdout}")
