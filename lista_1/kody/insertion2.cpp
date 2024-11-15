@@ -8,7 +8,7 @@ void insertion_sort2(float A[], int n)
 {
   comparisons += 1;
   assignments += 1;
-  for (int i = 1; i < n; i += 2)
+  for (int i = 1; i < n - 1; i += 2)
   {
     assignments += 1;
     float max = A[i];
