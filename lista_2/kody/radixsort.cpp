@@ -71,6 +71,11 @@ void countingSort(int A[], int n, int d, int base)
 
 void radixSort(int A[], int n, int d)
 {
+  comparisons += 1;
+  if (n == 0)
+  {
+    return;
+  }
   assignments += 1;
   int max = maximumNumber(A, n);
   comparisons += 1;
@@ -139,7 +144,7 @@ int main()
   {
     cin >> A[i];
   }
-  negativeRadixSort(A, n, 2);
+  negativeRadixSort(A, n, 16); // d
   cout << n << " ";
   cout << assignments << " ";
   cout << comparisons << " ";
