@@ -171,7 +171,7 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Quick
     \textbf{100,000} & 6,101,569 & 5,273,746 & 11,375,315 & 20 \\ \hline
     \end{tabular}
     }
-    \caption{Liczba operacji dla algorytmu \texttt{Quick Sort} przy różnych rozmiarach tablicy}
+    \caption{Liczba operacji i czas wykonania dla algorytmu \texttt{Quick Sort} przy różnych rozmiarach tablicy}
     \label{tab:quicksort_results}
 \end{table}
 
@@ -191,20 +191,68 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Quick
     \textbf{100,000} & 4,327,709 & 3,456,949 & 7,784,658 & 16 \\ \hline
     \end{tabular}
     }
-    \caption{Liczba operacji dla modyfikacji algorytmu \texttt{Quick Sort} przy różnych rozmiarach tablicy}
+    \caption{Liczba operacji i czas wykonania dla modyfikacji algorytmu \texttt{Quick Sort} przy różnych rozmiarach tablicy}
     \label{tab:quicksort2_results}
 \end{table}
+Poniżej przedstawiamy wyniki dla algorytmu \texttt{Quick Sort} w przypadku posortowanych tablic, co odpowiada jego pesymistycznemu przypadkowi. Ze względu na ogromną liczbę operacji wykonywanych w tym scenariuszu, analizy zostały ograniczone do tablic o maksymalnej wielkości $20000$ elementów.
+\begin{table}[H]
+    \centering
+    \scalebox{0.9}{
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} & \textbf{Czas (ms)} \\ \hline
+    \textbf{5} & 36 & 47 & 83 & 0 \\ \hline
+    \textbf{10} & 126 & 172 & 298 & 0 \\ \hline
+    \textbf{100} & 10,296 & 15,247 & 25,543 & 1 \\ \hline
+    \textbf{5,005} & 25,065,036 & 37,587,547 & 62,652,583 & 64 \\ \hline
+    \textbf{10,000} & 100,029,996 & 150,024,997 & 250,054,993 & 256 \\ \hline
+    \textbf{20,000} & 400,059,996 & 600,049,997 & 1,000,109,993 & 1116 \\ \hline
+    \end{tabular}
+    }
+    \caption{Liczba operacji dla algorytmu \texttt{Quick Sort} przy różnych rozmiarach tablicy w pesymistycznym przypadku}
+    \label{tab:quicksortp_results}
+\end{table}
+\begin{table}[H]
+    \centering
+    \scalebox{0.9}{
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} & \textbf{Czas (ms)} \\ \hline
+    \textbf{5} & 22 & 23 & 45 & 0 \\ \hline
+    \textbf{10} & 65 & 76 & 141 & 0 \\ \hline
+    \textbf{100} & 2900 & 5251 & 8151 & 0 \\ \hline
+    \textbf{5,005} & 6,282,522 & 12,537,523 & 18,820,045 & 17 \\ \hline
+    \textbf{10,000} & 25,040,000 & 50,025,001 & 75,065,001 & 74 \\ \hline
+    \textbf{20,000} & 100,080,000 & 200,050,001 & 300,130,001 & 304 \\ \hline
+    \end{tabular}
+    }
+    \caption{Liczba operacji i czas wykonania dla modyfikacji algorytmu \texttt{Quick Sort} przy różnych rozmiarach tablicy w pesymistycznym przypadku}
+    \label{tab:quicksortp_results}
+\end{table}
+Poniżej przedstawiamy wykresy obrazujące powyższe dane:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Figure_1.png}
+    \includegraphics[width=0.8\textwidth]{Figure_1.png}
     \caption{Ilość operacji w zależności od rozmiarów tablicy wejściowej}
     \label{fig:quicksort}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Figure_2.png}
-    \caption{Czas wykonania algorytmu w zależności od rozmiarów tablicy wejściowej}
+    \includegraphics[width=0.8\textwidth]{Figure_2.png}
+    \caption{Czas wykonania algorytmów w zależności od rozmiarów tablicy wejściowej}
     \label{fig:quicksortt}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_7.png}
+    \caption{Ilość operacji algorytmu w zależności od rozmiarów tablicy wejściowej w pesymistycznym przypadku}
+    \label{fig:quicksortp}
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_8.png}
+    \caption{Czas wykonania algorytmów w zależności od rozmiarów tablicy wejściowej w pesymistycznym przypadku}
+    \label{fig:quicksorttp}
+\end{figure}
 \end{figure}
 \subsection{Radix Sort}
 \textit{Radix Sort} to algorytm sortowania, który należy do grupy algorytmów nieopierających się na porównaniach. Jego działanie polega na porządkowaniu liczb na podstawie kolejnych cyfr w danym systemie liczbowym, zaczynając od najmniej, a kończąc na najbardziej znaczącej pozycji. Z tego względu algorytm ten jest stosowany przy założeniu, że sortujemy tablice liczb naturalnych. Złożoność czasowa algorytmu wynosi $\Theta(k(n + d))$, gdzie:
@@ -214,7 +262,6 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Quick
     \item $d$ to liczba różnych cyfr w systemie liczbowym (np. w systemie dziesiętnym $d = 10$).
 \end{itemize}
 W naszej implementacji \textit{Radix Sort} korzystamy z algorytmu \textit{Counting Sort} do sortowania elementów na podstawie każdej cyfry. Dzięki stabilności \textit{Counting Sort}, algorytm \textit{Radix Sort} jest również stabilny. Poniżej przedstawiamy jego implementację oraz opis:
-\newpage
 \begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Counting Sort}}, label={lst:countingsort}]
 void countingSort(int A[], int n, int d, int base)
 {
@@ -259,7 +306,6 @@ Wtedy poprzez dzielenie całkowite oraz operację modulo:
 możemy wyłuskać $p$-tą cyfrę w $d$-arnej reprezentacji liczby.
 
 Teraz możemy przedstawić kod implementacji algorytmu \texttt{Radix Sort}:
-\newpage
 \begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Radix Sort}}, label={lst:radixsort}]
 void radixSort(int A[], int n, int d)
 {
@@ -277,7 +323,7 @@ void radixSort(int A[], int n, int d)
 Algorytm ten najpierw znajduje największą liczbę $max$ w tablicy $A$, a następnie iteruje przez wszystkie potęgi $d$, które występują w zapisie $max$. W każdej iteracji sortuje liczby w tablicy $A$ według kolejnych cyfr w $d$-arnym zapisie liczbowym, korzystając z algorytmu \texttt{Counting Sort}.
 \subsubsection{Rozszerzenie algorytmu Radix Sort}
 Powyższy algorytm można łatwo rozszerzyć na tablice liczb całkowitych. Poniżej przedstawiamy szczegóły implementacji rozszerzonej wersji \texttt{Radix Sort}:
-
+\newpage
 \begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja rozszerzonej wersji \texttt{Radix Sort}}, label={lst:radixsort2}]
 void negativeRadixSort(int A[], int n, int d)
 {
@@ -370,13 +416,13 @@ Z tabel wynika, że zwiększanie wartości $d$ przynosi wymierne korzyści w prz
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Figure_3.png}
+    \includegraphics[width=0.8\textwidth]{Figure_3.png}
     \caption{Ilość operacji w zależności od rozmiarów tablicy wejściowej i podstawy $d$}
     \label{fig:radixsort}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Figure_4.png}
+    \includegraphics[width=0.8\textwidth]{Figure_4.png}
     \caption{Czas działania algorytmu (ms) w zależności od rozmiarów tablicy wejściowej i bazy $d$}
     \label{fig:radixsortt}
 \end{figure}
@@ -454,7 +500,7 @@ Teraz możemy przedstawić finalną implementację algorytmu \textit{Bucket Sort
 \[
     x' = \frac{x - \min(x)}{\max(x) - \min(x)}
 \]
-gdzie $x$ to wartość oryginalna, a $x'$ to wartość znormalizowana, która mieści się w przedziale $(0, 1]$.
+gdzie $x$ to wartość oryginalna, a $x'$ to wartość znormalizowana, która mieści się w przedziale $[0, 1]$.
 \newpage
 \begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Bucket Sort}}, label={lst:bucketsort}]
 void bucketSort(double A[], int n)
@@ -525,8 +571,25 @@ Tabele poniżej przedstawiają wyniki eksperymentów dla algorytmu \textit{Bucke
     \textbf{100,000} & 1,560,435 & 1,507,203 & 3,067,638 & 34 \\ \hline
     \end{tabular}
     }
-    \caption{Liczba operacji dla modyfikacji algorytmu \texttt{Bucket Sort} przy różnych rozmiarach tablicy}
+    \caption{Liczba operacji i czas wykonania dla algorytmu \texttt{Bucket Sort} przy różnych rozmiarach tablicy}
     \label{tab:bucketsort_results}
+\end{table}
+\begin{table}[H]
+    \centering
+    \scalebox{0.9}{
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \textbf{Wielkość tablicy} & \textbf{Ilość przypisań} & \textbf{Ilość porównań} & \textbf{Łączna liczba operacji} & \textbf{Czas (ms)} \\ \hline
+    \textbf{5} & 100 & 90 & 190 & 0 \\ \hline
+    \textbf{10} & 220 & 206 & 426 & 0 \\ \hline
+    \textbf{100} & 6,568 & 6,466 & 13,034 & 0 \\ \hline
+    \textbf{5,005} & 12,617,577 & 12,612,573 & 25,230,150 & 37 \\ \hline
+    \textbf{10,000} & 50,213,876 & 50,203,879 & 100,417,755 & 139 \\ \hline
+    \textbf{20,005} & 200,584,455 & 200,564,459 & 401,148,914 & 606 \\ \hline
+    \end{tabular}
+    }
+    \caption{Liczba operacji i czas wykonania dla algorytmu \texttt{Bucket Sort} przy różnych rozmiarach tablicy w pesymistycznym przypadku}
+    \label{tab:bucketsortp_results}
 \end{table}
 
 Poniżej przedstawiamy wykresy, na których porównujemy algorytm \textit{Bucket Sort} z algorytmem \textit{Quick Sort}.
@@ -543,11 +606,25 @@ Poniżej przedstawiamy wykresy, na których porównujemy algorytm \textit{Bucket
     \caption{Czas działania algorytmów w zależności od rozmiarów tablicy wejściowej}
     \label{fig:buckett}
 \end{figure}
-Co ciekawe, pomimo mniejszej liczby operacji wykonywanych przez algorytm \texttt{Bucket Sort}, czas jego działania jest zauważalnie dłuższy. Możliwe, że wykonywanie porównań na strukturach danych jest bardziej obciążające czasowo, a prawdziwą moc tego algorytmu dostrzegalibyśmy dopiero przy ekstremalnie dużych tablicach danych.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_9.png}
+    \caption{Ilość operacji w zależności od rozmiarów tablicy wejściowej w pesymistycznym przypadku}
+    \label{fig:bucket}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure_10.png}
+    \caption{Czas działania algorytmów w zależności od rozmiarów tablicy wejściowej}
+    \label{fig:buckett}
+\end{figure}
+Co ciekawe, pomimo mniejszej liczby operacji wykonywanych przez algorytm \texttt{Bucket Sort}, jego czas działania jest zauważalnie dłuższy. Wynika to z faktu, że tworzenie list oraz wykonywanie na nich operacji jest znacznie wolniejsze niż przeprowadzanie tych samych operacji na tablicach. Teoretycznym usprawnieniem mogłoby być zmniejszenie liczby kubełków.
 \section{Wnioski}
-Z przeprowadzonej analizy wynika, że wybór algorytmu sortującego zależy głównie od charakterystyki danych wejściowych oraz ich rozmiaru. W ogólnym przypadku (bez dodatkowych założeń) algorytm \texttt{Quick Sort} jest najczęściej najlepszym wyborem, ze względu na jego elastyczność (może posortować praktycznie każdy rodzaj danych) oraz bardzo dobrą złożoność średnią $(\bigO(n \log n)$. W sytuacjach, gdy dane wejściowe są liczbami całkowitymi, algorytm \texttt{Radix Sort} wykazuje znacznie lepszą wydajność, szczególnie gdy wybór odpowiedniej podstawy $d$ jest dopasowany do specyfiki danych. \texttt{Radix Sort} jest algorytmem liniowym w przypadku liczb całkowitych, co czyni go niezwykle wydajnym, szczególnie dla dużych zbiorów, ale jego skuteczność w dużej mierze zależy od właściwego dobrania podstawy.
+Z przeprowadzonej analizy wynika, że wybór algorytmu sortującego zależy głównie od charakterystyki danych wejściowych oraz ich rozmiaru. W ogólnym przypadku (bez dodatkowych założeń) algorytm \texttt{Quick Sort} jest najczęściej najlepszym wyborem ze względu na swoją elastyczność (może posortować praktycznie każdy rodzaj danych) oraz bardzo dobrą średnią złożoność czasową $\bigO(n \log n)$. 
 
-Z kolei, jeśli dodatkowym założeniem jest jednostajny rozkład liczb w zadanym przedziale, bardzo dobrą efektywność wykazuje algorytm \texttt{Bucket Sort}. Jego złożoność czasowa jest zależna od liczby kubełków oraz rozkładu danych w tych kubełkach, dlatego sprawdza się szczególnie dobrze, gdy dane są równomiernie rozmieszczone. Dla danych, które są rozproszone w szerokim przedziale, \texttt{Bucket Sort} może znacznie poprawić wydajność sortowania.
+W sytuacjach, gdy dane wejściowe są liczbami całkowitymi, algorytm \texttt{Radix Sort} wykazuje znacznie lepszą wydajność, szczególnie gdy wybór odpowiedniej podstawy $d$ jest dopasowany do specyfiki danych. \texttt{Radix Sort}, przy odpowiednich założeniach, jest algorytmem o złożoności liniowej, co czyni go niezwykle efektywnym, zwłaszcza dla dużych zbiorów danych. Jego skuteczność zależy jednak w dużej mierze od właściwego dobrania podstawy $d$, co może wymagać dodatkowej analizy.
 
-Wynika z tego, że decyzja o wyborze algorytmu sortującego powinna być oparta na analizie charakterystyki danych. W wielu przypadkach, odpowiedni dobór algorytmu pozwala na znaczną optymalizację procesu sortowania, a tym samym na zmniejszenie złożoności obliczeniowej problemu. W szczególności, dobór algorytmu dostosowanego do danych może zredukować czas wykonania operacji sortowania, co jest istotne w przypadku pracy z dużymi zbiorami danych.
+Z kolei, jeśli dodatkowym założeniem jest jednostajny rozkład liczb w zadanym przedziale, bardzo dobrą efektywność wykazuje algorytm \texttt{Bucket Sort}. Jego złożoność czasowa jest zależna od liczby kubełków oraz rozkładu danych pomiędzy tymi kubełkami. Sprawdza się on szczególnie dobrze, gdy dane są równomiernie rozmieszczone. Dla danych rozproszonych w szerokim przedziale, \texttt{Bucket Sort} może znacząco poprawić wydajność sortowania. Niemniej, posiada on istotną wadę — operacje na listach są znacznie wolniejsze niż operacje na tablicach, co może negatywnie wpływać na czas działania algorytmu.
+
+Podsumowując, decyzja o wyborze algorytmu sortującego powinna być oparta na analizie charakterystyki danych. W wielu przypadkach odpowiedni dobór algorytmu pozwala na znaczną optymalizację procesu sortowania, co prowadzi do zmniejszenia złożoności obliczeniowej problemu.
 \end{document}
