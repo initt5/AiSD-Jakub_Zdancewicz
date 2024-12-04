@@ -4,11 +4,6 @@ using namespace std;
 unsigned long long int assignments = 0;
 unsigned long long int comparisons = 0;
 
-struct Pair
-{
-  int first;
-  int second;
-};
 struct Node
 {
   Node *prev = nullptr;
@@ -89,42 +84,27 @@ struct List
     return x;
   }
 };
-Pair maxminNumber(double A[], int n)
-{
-  assignments += 2;
-  int max = A[0];
-  int min = A[0];
-  assignments += 1;
-  comparisons += 1;
-  for (int i = 1; i < n; ++i)
-  {
-    comparisons += 3;
-    assignments += 3;
-    if (A[i] > max)
-    {
-      max = A[i];
-    }
-    if (A[i] < min)
-    {
-      min = A[i];
-    }
-  }
-  assignments += 2;
-  Pair pair;
-  pair.first = min;
-  pair.second = max;
-  return pair;
-}
 void bucketSort(double A[], int n)
 {
   comparisons += 1;
-  if (n == 0)
+  if (n <= 1)
   {
     return;
   }
-  Pair maxmin = maxminNumber(A, n);
-  double min = maxmin.first;
-  double max = maxmin.second;
+  double min = A[0], max = A[0];
+  assignments += 2;
+  assignments += 1;
+  comparisons += 1;
+  for (int i = 1; i < n; i++)
+  {
+    comparisons += 1;
+    comparisons += 2;
+    if (A[i] < min)
+      min = A[i];
+    if (A[i] > max)
+      max = A[i];
+    assignments += 2;
+  }
   assignments += 2;
   comparisons += 1;
   if (max == min)
@@ -132,7 +112,7 @@ void bucketSort(double A[], int n)
     return;
   }
   assignments += 1;
-  int range = max - min;
+  double range = max - min;
   assignments += 1;
   List *B[n];
   assignments += 1;
@@ -151,7 +131,9 @@ void bucketSort(double A[], int n)
     comparisons += 5;
     Node *element = new Node;
     element->key = A[i];
-    int index = int((element->key - min) / range * n);
+    double normalized = (A[i] - min) / range;
+    int index = int(normalized * n);
+    assignments += 3;
     comparisons += 1;
     if (index == n)
     {

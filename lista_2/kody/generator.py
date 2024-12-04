@@ -2,8 +2,8 @@
 import random
 import sys
 
-min_float = -1000000
-max_float = 1000000
+min_float = 0#-1000000
+max_float = 1#1000000
 
 n = int(sys.argv[1]) # random.randint(10000, 100000)
 mode = sys.argv[2]

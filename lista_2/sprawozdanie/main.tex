@@ -505,18 +505,23 @@ gdzie $x$ to wartość oryginalna, a $x'$ to wartość znormalizowana, która mi
 \begin{lstlisting}[style=mystyle, language=C++, caption={Implementacja \texttt{Bucket Sort}}, label={lst:bucketsort}]
 void bucketSort(double A[], int n)
 {
-  if (n == 0)
+  if (n <= 1)
   {
     return;
   }
-  Pair maxmin = maxminNumber(A, n);
-  double min = maxmin.first;
-  double max = maxmin.second;
+  double min = A[0], max = A[0];
+  for (int i = 1; i < n; i++)
+  {
+    if (A[i] < min)
+      min = A[i];
+    if (A[i] > max)
+      max = A[i];
+  }
   if (max == min)
   {
     return;
   }
-  int range = max - min;
+  double range = max - min;
   List *B[n];
   for (int i = 0; i < n + 1; ++i)
   {
@@ -526,7 +531,8 @@ void bucketSort(double A[], int n)
   {
     Node *element = new Node;
     element->key = A[i];
-    int index = int((element->key - min) / range * n);
+    double normalized = (A[i] - min) / range;
+    int index = int(normalized * n);
     if (index == n)
     {
       --index;
