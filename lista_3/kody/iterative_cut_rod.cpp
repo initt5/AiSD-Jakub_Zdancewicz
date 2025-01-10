@@ -6,46 +6,39 @@ unsigned long long int comparisons = 0;
 
 bool TEST_MODE = true;
 
-int memorized_cut_rod(int p[], int n, int r[], int s[])
+void extended_bottom_up_cut_rod(int p[], int n, int r[], int s[])
 {
-  comparisons += 1;
-  if (r[n] >= 0)
-  {
-    return r[n];
-  }
   assignments += 1;
-  int q = -1;
+  r[0] = 0;
+  assignments += 1;
   comparisons += 1;
-  if (n == 0)
+  for (int j = 1; j <= n; ++j)
   {
-    assignments += 1;
-    q = 0;
-  }
-  else
-  {
+    assignments += 2;
+    comparisons += 1;
+    int q = -1;
     assignments += 1;
     comparisons += 1;
-    for (int i = 1; i <= n; ++i)
+    for (int i = 1; i <= j; ++i)
     {
       assignments += 1;
       comparisons += 2;
-      if (q < memorized_cut_rod(p, n - i, r, s) + p[i - 1])
+      if (q < p[i - 1] + r[j - i])
       {
         assignments += 2;
-        q = memorized_cut_rod(p, n - i, r, s) + p[i - 1];
-        s[n] = i;
+        q = p[i - 1] + r[j - i];
+        s[j] = i;
       }
     }
+    assignments += 1;
+    r[j] = q;
   }
-  assignments += 1;
-  r[n] = q;
-  return q;
 }
-
 void print_solution(int p[], int n, int r[], int s[])
 {
+  extended_bottom_up_cut_rod(p, n, r, s);
   cout << n << " ";
-  cout << memorized_cut_rod(p, n, r, s) << " ";
+  cout << r[n] << " ";
   cout << assignments << " ";
   cout << comparisons << " ";
   if (!TEST_MODE)
@@ -65,7 +58,6 @@ void print_solution(int p[], int n, int r[], int s[])
     }
   }
 }
-
 int main()
 {
   int n;
@@ -75,13 +67,8 @@ int main()
   {
     cin >> p[i];
   }
-
   int r[n + 1];
   int s[n + 1];
-  for (int i = 0; i <= n; ++i)
-  {
-    r[i] = -1;
-  }
   print_solution(p, n, r, s);
   return 0;
 }

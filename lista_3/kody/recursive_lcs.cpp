@@ -1,32 +1,49 @@
 #include <iostream>
 using namespace std;
 
+unsigned long long int assignments = 0;
+unsigned long long int comparisons = 0;
+
+bool TEST_MODE = true;
+
 int recursive_lcs(string X, string Y, int m, int n, int **c, int **b)
 {
+  comparisons += 1;
   if (c[m][n] != -1)
   {
     return c[m][n];
   }
+  comparisons += 2;
   if (m == 0 || n == 0)
   {
+    assignments += 1;
     c[m][n] = 0;
     return c[m][n];
   }
+  comparisons += 1;
   if (X[m - 1] == Y[n - 1])
   {
+    assignments += 2;
     c[m][n] = recursive_lcs(X, Y, m - 1, n - 1, c, b) + 1;
     b[m][n] = 3;
     return c[m][n];
   }
-  if (recursive_lcs(X, Y, m - 1, n, c, b) < recursive_lcs(X, Y, m, n - 1, c, b))
+  comparisons += 1;
+
+  int left = recursive_lcs(X, Y, m - 1, n, c, b);
+  int up = recursive_lcs(X, Y, m, n - 1, c, b);
+
+  if (left >= up)
   {
-    c[m][n] = recursive_lcs(X, Y, m, n - 1, c, b);
-    b[m][n] = 1;
+    assignments += 2;
+    c[m][n] = left;
+    b[m][n] = 2;
   }
   else
   {
-    c[m][n] = recursive_lcs(X, Y, m - 1, n, c, b);
-    b[m][n] = 2;
+    assignments += 2;
+    c[m][n] = up;
+    b[m][n] = 1;
   }
   return c[m][n];
 }
@@ -79,10 +96,16 @@ int main()
       b[i][j] = 0;
     }
   }
-  cout << "Length of LCS: " << recursive_lcs(X, Y, m, n, c, b) << endl;
-  cout << "LCS: ";
-  print_lcs_solution(X, b, m, n);
-  cout << endl;
+  cout << n << " ";
+  cout << recursive_lcs(X, Y, m, n, c, b) << " ";
+  cout << assignments << " ";
+  cout << comparisons << " ";
+  if (!TEST_MODE)
+  {
+    cout << "LCS: ";
+    print_lcs_solution(X, b, m, n);
+    cout << endl;
+  }
 
   for (int i = 0; i <= m; ++i)
   {

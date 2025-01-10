@@ -1,24 +1,41 @@
 #include <iostream>
 using namespace std;
 
+unsigned long long int assignments = 0;
+unsigned long long int comparisons = 0;
+
+bool TEST_MODE = true;
+
 void iterative_lcs(string X, string Y, int m, int n, int **c, int **b)
 {
+  assignments += 1;
+  comparisons += 1;
   for (int i = 1; i <= m; ++i)
   {
+    assignments += 2;
+    comparisons += 2;
     for (int j = 1; j <= n; ++j)
     {
+      assignments += 1;
+      comparisons += 1;
       if (X[i - 1] == Y[j - 1])
       {
+        comparisons += 1;
+        assignments += 2;
         c[i][j] = c[i - 1][j - 1] + 1;
         b[i][j] = 3;
       }
       else if (c[i - 1][j] >= c[i][j - 1])
       {
+        comparisons += 2;
+        assignments += 2;
         c[i][j] = c[i - 1][j];
         b[i][j] = 2;
       }
       else
       {
+        comparisons += 2;
+        assignments += 2;
         c[i][j] = c[i][j - 1];
         b[i][j] = 1;
       }
@@ -78,12 +95,16 @@ int main()
   }
 
   iterative_lcs(X, Y, m, n, c, b);
-
-  cout << "Length of LCS: " << c[m][n] << endl;
-
-  cout << "LCS: ";
-  print_lcs_solution(X, b, m, n);
-  cout << endl;
+  cout << n << " ";
+  cout << c[m][n] << " ";
+  cout << assignments << " ";
+  cout << comparisons << " ";
+  if (!TEST_MODE)
+  {
+    cout << "LCS: ";
+    print_lcs_solution(X, b, m, n);
+    cout << endl;
+  }
 
   for (int i = 0; i <= m; ++i)
   {
